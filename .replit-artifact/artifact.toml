@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "JOJ Dakar 2026 — Immersive Fan"
+version = "1.0.0"
+id = "artifacts/joj-dakar-2026"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23103
+
+[services.development]
+run = "pnpm --filter @workspace/joj-dakar-2026 run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/joj-dakar-2026", "run", "build" ]
+publicDir = "artifacts/joj-dakar-2026/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23103"
+BASE_PATH = "/"
